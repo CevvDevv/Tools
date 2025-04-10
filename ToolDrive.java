@@ -19,9 +19,7 @@ public class ToolDrive {
         newBox.add(wrench);
         newBox.add(drill);
 
-        boxList.listTools(newBox.box);
-        System.out.println();
-        boxList.useToolBox(newBox.box);
+        boxList.allInOne(newBox.box);
 
     }
 }
@@ -76,6 +74,15 @@ class Toolbox<T extends Tool> {
     public void useToolBox(List<T> tools){
         for (T tool : tools)
         {
+            tool.use();
+        }
+    }
+
+    public void allInOne(List<? extends Tool> tools){
+        for (Tool tool : tools)
+        {
+            String name = tool.getName();
+            System.out.println(name);
             tool.use();
         }
     }
