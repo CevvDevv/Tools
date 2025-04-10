@@ -19,8 +19,11 @@ public class ToolDrive {
         newBox.add(wrench);
         newBox.add(drill);
 
-        boxList.allInOne(newBox.box);
-
+        boxList.allInOne(newBox.box); // Unsorted
+        System.out.println();
+        boxList.sortByName(newBox.box); // Sorted by name
+        System.out.println();
+        boxList.sortByNameReversed(newBox.box);
     }
 }
 
@@ -63,6 +66,14 @@ class Toolbox<T extends Tool> {
         box.add(tool);
     }
 
+    public void display(List<? extends Tool> tools) {
+        for (Tool tool : tools) {
+            System.out.println(tool.getName());
+            tool.use();
+        }
+    }    
+
+
     public void listTools(List<T> tools){
         for (T tool : tools)
         {
@@ -85,5 +96,20 @@ class Toolbox<T extends Tool> {
             System.out.println(name);
             tool.use();
         }
+    }
+    // Sorting by Name
+
+    public void sortByName(List<? extends Tool> tools) {
+        tools.sort((t1, t2) -> t1.getName().compareTo(t2.getName()));
+
+        // Display afterwards
+        display(tools);
+    }
+
+    // Sorting in reverse.
+
+    void sortByNameReversed(List<? extends Tool> tools) {
+        tools.sort(Comparator.comparing(Tool::getName).reversed());
+        display(tools);
     }
 }
